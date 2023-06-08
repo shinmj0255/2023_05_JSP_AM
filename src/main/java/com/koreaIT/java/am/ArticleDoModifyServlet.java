@@ -40,7 +40,7 @@ public class ArticleDoModifyServlet extends HttpServlet {
 			sql.append(", `body` = ?", body);
 			sql.append("WHERE id = ?", id);
 			
-			DBUtil.delete(conn, sql);
+			DBUtil.update(conn, sql);
 			
 			response.getWriter().append(String.format("<script>alert('%d번 게시글 수정 성공'); location.replace('detail?id=%d');</script>", id, id));
 			
