@@ -22,7 +22,7 @@
 	<div>
 		<a href="list">목록</a>
 		<a href="modify?id=<%= (int) articleMap.get("id") %>">수정</a>
-		<a href="doDelete?id=<%= (int) articleMap.get("id") %>">삭제</a>
+		<a href="doDelete?id=<%= (int) articleMap.get("id") %>" onclick="if(confirm('삭제하시겠습니까?') == false) return false">삭제</a>
 	</div>
 </body>
 </html>
