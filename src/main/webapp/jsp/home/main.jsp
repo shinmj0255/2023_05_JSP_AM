@@ -10,5 +10,6 @@
 	<h1>메인 페이지</h1>
 	
 	<div><a href="../article/list">게시물 리스트</a></div>
+	<div><a href="../article/write">게시물 작성</a></div>
 </body>
 </html>

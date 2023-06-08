@@ -29,4 +29,24 @@
     <servlet-name>ArticleListServlet</servlet-name>
     <url-pattern>/ArticleListServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ArticleDoWriteServlet</display-name>
+    <servlet-name>ArticleDoWriteServlet</servlet-name>
+    <servlet-class>com.koreaIT.java.am.ArticleDoWriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ArticleDoWriteServlet</servlet-name>
+    <url-pattern>/ArticleDoWriteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ArticleWriteServlet</display-name>
+    <servlet-name>ArticleWriteServlet</servlet-name>
+    <servlet-class>com.koreaIT.java.am.ArticleWriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ArticleWriteServlet</servlet-name>
+    <url-pattern>/ArticleWriteServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
