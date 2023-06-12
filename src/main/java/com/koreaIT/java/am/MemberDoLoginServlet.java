@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Map;
 
 import com.koreaIT.java.am.config.Config;
 import com.koreaIT.java.am.util.DBUtil;
@@ -15,8 +16,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/doJoin")
-public class MemberDoJoinServlet extends HttpServlet {
+@WebServlet("/member/doLogin")
+public class MemberDoLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,19 +33,23 @@ public class MemberDoJoinServlet extends HttpServlet {
 			
 			String loginId = request.getParameter("loginId");
 			String loginPw = request.getParameter("loginPw");
-			String name = request.getParameter("name");
 			
 			SecSql sql = new SecSql();
-			sql.append("INSERT INTO `member`");
-			sql.append("SET regDate = NOW()");
-			sql.append(", updateDate = NOW()");
-			sql.append(", loginId = ?", loginId);
-			sql.append(", loginPw = ?", loginPw);
-			sql.append(", `name` = ?", name);
+			sql.append("SELECT * FROM `member`");
+			sql.append("WHERE loginId = ?", loginId);
 			
-			DBUtil.insert(conn, sql);
+			Map<String, Object> memberRow = DBUtil.selectRow(conn, sql);
 			
-			response.getWriter().append(String.format("<script>alert('%s님 환영합니다~'); location.replace('../home/main');</script>", name));
+			if (memberRow.isEmpty()) {
+				response.getWriter().append(String.format("<script>alert('%s은(는) 존재하지 않는 아이디입니다.'); location.replace('login');</script>", loginId));
+				return;
+			}
+			
+			if (memberRow.get("loginPw").equals(loginPw) == false) {
+				response.getWriter().append(String.format("<script>alert('비밀번호가 일치하지 않습니다.'); location.replace('login');</script>"));
+			}
+			
+			response.getWriter().append(String.format("<script>alert('%s님 로그인성공'); location.replace('../home/main');</script>", memberRow.get("name")));
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
