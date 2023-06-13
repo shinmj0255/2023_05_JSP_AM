@@ -9,7 +9,9 @@
 	int totalPage = (int) request.getAttribute("totalPage");
 	int from = (int) request.getAttribute("from");
 	int end = (int) request.getAttribute("end");
+	int loginedMemberId = (int) request.getAttribute("loginedMemberId");
 %>
+
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +23,13 @@
 	<h1>게시물 리스트</h1>
 	
 	<div><a href="../home/main">메인</a></div>
-	<div><a href="write">글쓰기</a></div>
+	<%
+		if (loginedMemberId != -1) {
+	%>
+		<div><a href="write">글쓰기</a></div>
+	<% 	
+		}
+	%>
 	
 	<table border="1">
 		<colgroup>
