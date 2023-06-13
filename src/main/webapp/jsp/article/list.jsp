@@ -41,6 +41,7 @@
 			<th>번호</th>
 			<th>작성일</th>
 			<th>제목</th>
+			<th>작성자</th>
 		</tr>
 		<% 
  			for(Map<String, Object> articleMap : articleListMap){
@@ -49,6 +50,7 @@
 			<td><%= articleMap.get("id") %></td>
 			<td><%= articleMap.get("regDate") %></td>
 			<td><a href="detail?id=<%= articleMap.get("id") %>"><%= articleMap.get("title") %></a></td>
+			<td><%= articleMap.get("writerName") %></td>
 		</tr>
 		<%
  			}
